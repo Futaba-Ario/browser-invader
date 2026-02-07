@@ -26,3 +26,5 @@ python -m http.server 8080
 
 ## GitHub Pages
 `main` ブランチへの push で `.github/workflows/pages.yml` が実行され、静的サイトを配信します。
+
+Note: On some GitHub plans, Pages for private repositories is not available. If deployment is skipped, switch repository visibility to public to publish.
