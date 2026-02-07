@@ -1,30 +1,34 @@
 # Browser Invader
 
-ブラウザで動く、インベーダー風2DシューティングのMVPです。
+ブラウザで遊べる、インベーダー風の2Dシューティングゲームです。  
+HTML5 Canvas + Vanilla JavaScript（ES Modules）で実装しています。
+
+## Play Online
+- https://futaba-ario.github.io/browser-invader/
 
 ## Features
-- Canvas + Vanilla JavaScriptで実装
-- 自機移動 / 敵編隊 / 敵弾 / 当たり判定 / スコア
-- タイトル画面、ゲームオーバー、リトライ
-- `localStorage` でハイスコア保存
-- GitHub Pagesでそのまま公開可能
+- 自機移動 / 敵編隊 / 敵弾 / 当たり判定 / スコア管理
+- タイトル画面・ゲームオーバー・リトライ
+- `localStorage` によるハイスコア保存
+- GitHub Pages への自動デプロイ対応
 
 ## Controls
 - `ArrowLeft` / `ArrowRight`: 移動
 - `Space`: 発射
 - `Enter`: 開始 / リトライ
 
-## Local Run
-ES Modulesを使っているため、ローカルHTTPサーバーで起動してください。
+## Local Development
+ES Modules を使用しているため、ローカルHTTPサーバーで起動してください。
 
 ```powershell
-cd c:\Users\xlast\.gemini\antigravity\scratch\browser-invader
+git clone https://github.com/Futaba-Ario/browser-invader.git
+cd browser-invader
 python -m http.server 8080
 ```
 
 ブラウザで `http://localhost:8080` を開きます。
 
-## GitHub Pages
-`main` ブランチへの push で `.github/workflows/pages.yml` が実行され、静的サイトを配信します。
+## Deploy (GitHub Pages)
+`main` ブランチへの push をトリガーに `.github/workflows/pages.yml` が実行され、静的サイトを配信します。
 
-Note: On some GitHub plans, Pages for private repositories is not available. If deployment is skipped, switch repository visibility to public to publish.
+注記: GitHub プランによっては private repository で GitHub Pages が利用できない場合があります。デプロイがスキップされる場合は、リポジトリを public に変更してください。
