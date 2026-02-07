@@ -14,8 +14,8 @@ export function renderGame(ctx, state) {
     drawOverlay(
       ctx,
       "BROWSER INVADER",
-      "Press Enter to start",
-      "Left/Right: move  Space: shoot"
+      "Press Enter or tap START",
+      "Move: Left/Right or touch buttons"
     );
   }
 
@@ -23,7 +23,7 @@ export function renderGame(ctx, state) {
     drawOverlay(
       ctx,
       "GAME OVER",
-      "Press Enter to retry",
+      "Press Enter or tap RETRY",
       `Final score: ${state.score}`
     );
   }

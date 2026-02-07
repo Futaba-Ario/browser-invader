@@ -1,5 +1,5 @@
 import { FIXED_TIMESTEP_MS, GAME_HEIGHT, GAME_WIDTH } from "./config.js";
-import { clearPressed, createInput, attachInputListeners } from "./input.js";
+import { clearPressed, createInput, attachInputListeners, attachVirtualButtonListeners } from "./input.js";
 import { renderGame } from "./render.js";
 import { createInitialState } from "./state.js";
 import { loadHighScore, saveHighScore } from "./storage.js";
@@ -21,6 +21,13 @@ ctx.imageSmoothingEnabled = false;
 
 const input = createInput();
 const detachInput = attachInputListeners(input, window);
+const actionButton = document.getElementById("action-button");
+const detachVirtualInput = attachVirtualButtonListeners(input, {
+  left: document.getElementById("btn-left"),
+  right: document.getElementById("btn-right"),
+  shoot: document.getElementById("btn-shoot"),
+  action: actionButton
+});
 const state = createInitialState(loadHighScore());
 
 let accumulatorMs = 0;
@@ -43,14 +50,27 @@ function frame(now) {
     accumulatorMs -= FIXED_TIMESTEP_MS;
   }
 
+  syncActionButton(state.mode, actionButton);
   renderGame(ctx, state);
   requestAnimationFrame(frame);
 }
 
+syncActionButton(state.mode, actionButton);
 renderGame(ctx, state);
 requestAnimationFrame(frame);
 
 window.addEventListener("beforeunload", () => {
   detachInput();
+  detachVirtualInput();
   saveHighScore(state.highScore);
 });
+
+function syncActionButton(mode, button) {
+  if (!(button instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const visible = mode === "title" || mode === "gameover";
+  button.hidden = !visible;
+  button.textContent = mode === "gameover" ? "RETRY" : "START";
+}

@@ -15,6 +15,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  overscroll-behavior: none;
   background:
     radial-gradient(circle at 18% 16%, rgba(255, 111, 60, 0.18), transparent 30%),
     radial-gradient(circle at 82% 84%, rgba(51, 195, 169, 0.2), transparent 36%),
@@ -35,6 +36,7 @@ body {
 
 .game-shell {
   width: min(100%, 560px);
+  position: relative;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: rgba(6, 14, 20, 0.78);
@@ -55,15 +57,82 @@ body {
   font-size: 0.75rem;
 }
 
-#game {
+.game-stage {
   width: 100%;
   max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#game {
+  width: 100%;
   aspect-ratio: 3 / 4;
   display: block;
-  margin: 0 auto;
   border: 1px solid #28485c;
   border-radius: 8px;
   background: #060e14;
+}
+
+.action-button {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 140px;
+  padding: 12px 20px;
+  border: 1px solid #35596f;
+  border-radius: 10px;
+  color: var(--ink);
+  background: rgba(7, 22, 30, 0.95);
+  font: inherit;
+  letter-spacing: 1px;
+  z-index: 3;
+}
+
+.action-button[hidden] {
+  display: none;
+}
+
+.mobile-controls {
+  display: none;
+  width: 100%;
+}
+
+.mobile-move-controls {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+}
+
+.control-button {
+  flex: 1;
+  border: 1px solid #35596f;
+  border-bottom-width: 2px;
+  border-radius: 10px;
+  padding: 12px 10px;
+  color: var(--ink);
+  background: rgba(9, 25, 34, 0.94);
+  font: inherit;
+  letter-spacing: 0.7px;
+}
+
+.control-button-shoot {
+  flex: 0 0 32%;
+  min-width: 32%;
+}
+
+.control-button.is-active,
+.control-button:active {
+  transform: translateY(1px);
+  background: rgba(18, 45, 58, 0.98);
+  border-color: #4d7f98;
+}
+
+.action-button:active {
+  transform: translate(-50%, calc(-50% + 1px));
+  background: rgba(18, 45, 58, 0.98);
+  border-color: #4d7f98;
 }
 
 .help-panel {
@@ -109,5 +178,67 @@ kbd {
 
   .help-panel {
     margin-top: 52px;
+  }
+}
+
+@media (max-width: 959px) and (hover: none) and (pointer: coarse) {
+  .layout {
+    align-items: start;
+    padding-top: max(12px, env(safe-area-inset-top));
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    padding-left: max(12px, env(safe-area-inset-left));
+    gap: 12px;
+  }
+
+  .game-shell {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .game-header p {
+    margin-bottom: 10px;
+  }
+
+  #game,
+  .control-button,
+  .action-button {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .action-button {
+    display: block;
+  }
+
+  .mobile-controls {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .help-panel {
+    margin-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 959px) and (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  .mobile-controls {
+    display: none;
+  }
+
+  .action-button {
+    display: none;
+  }
+
+  .game-shell::after {
+    content: "Rotate to portrait for touch play.";
+    display: block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 10px;
+    text-align: center;
   }
 }

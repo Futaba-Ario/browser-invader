@@ -13,9 +13,14 @@ HTML5 Canvas + Vanilla JavaScript（ES Modules）で実装しています。
 - GitHub Pages への自動デプロイ対応
 
 ## Controls
-- `ArrowLeft` / `ArrowRight`: 移動
-- `Space`: 発射
-- `Enter`: 開始 / リトライ
+- Keyboard:
+  - `ArrowLeft` / `ArrowRight`: 移動
+  - `Space`: 発射
+  - `Enter`: 開始 / リトライ
+- Touch (mobile, portrait optimized):
+  - `LEFT` / `RIGHT` ボタン: 移動
+  - `SHOOT` ボタン: 発射
+  - `START` / `RETRY` ボタン: 開始 / リトライ
 
 ## Local Development
 ES Modules を使用しているため、ローカルHTTPサーバーで起動してください。
@@ -27,6 +32,9 @@ python -m http.server 8080
 ```
 
 ブラウザで `http://localhost:8080` を開きます。
+
+### Mobile device check
+同一ネットワーク上のスマホから `http://<PCのIPアドレス>:8080` にアクセスすると、実機でタッチ操作を確認できます。
 
 ## Deploy (GitHub Pages)
 `main` ブランチへの push をトリガーに `.github/workflows/pages.yml` が実行され、静的サイトを配信します。
